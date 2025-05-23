@@ -47,7 +47,7 @@ fetch(currentWeatherUrl)
     const iconClass = iconMap[current.icon] || "wi-na";  // fallback if missing
  		const weatherHTML = `
       <div style="display: flex; align-items: center; gap: 1rem;">
-        <i class="wi ${iconClass}" style="font-size: 48px;"></i>
+        <i class="wi ${iconClass}" style="font-size: 375px;"></i>
         <div>
           <p style="margin: 0;">${Math.round(current.temperature)}°F</p>
           <p style="margin: 0; font-size: 0.85em;">Feels like: ${Math.round(current.apparentTemperature)}°F</p>
