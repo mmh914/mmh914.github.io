@@ -66,36 +66,6 @@ fetch(url)
       console.error(err);
     });
 
-
-
-
-
-	// const gnewsApiKey = '11b9d06a21890b6749c2e8103fac5d0d';
-	// const newsUrl = `https://gnews.io/api/v4/search?q=politics&lang=en&country=us&max=3&apikey=${gnewsApiKey}`;
-	
-	// fetch(newsUrl)
-	//   .then(res => res.json())
-	//   .then(data => {
-	// 	const container = document.getElementById('usPolitics');
-	// 	let html = '<h2>U.S. Politics</h2><br />';
-	
-	// 	data.articles.forEach(article => {
-	// 	  html += `
-	// 		<div class="news-article">
-	// 		  <h3>${article.title}</h3>
-	// 		  <p class="summary">${article.description || 'No summary available.'}</p>
-	// 		  <small>${new Date(article.publishedAt).toLocaleString()} | ${article.source.name}</small>
-	// 		</div>
-	// 	  `;
-	// 	});
-	
-	// 	container.innerHTML = html;
-	//   })
-	//   .catch(err => {
-	// 	document.getElementById('usPolitics').innerText = 'Failed to load news.';
-	// 	console.error(err);
-	//   });
-	
 	
 
 
