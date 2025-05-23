@@ -2,6 +2,7 @@
 const apiKey = 'PiRnFs2pu8pCFrslg9HEcls9cf4nWlC5';
 const lat = 35.2271;
 const lon = -80.8431;
+const weatherIconUrl = `https://darksky.net/images/weather-icons/${current.icon}.png`;
 
 const gnewsApiKey = '11b9d06a21890b6749c2e8103fac5d0d';
 const categories = [
@@ -29,19 +30,31 @@ fetch(currentWeatherUrl)
   .then(data => {
     const current = data.currently;
     const weatherHTML = `
-      <small class="section-label">Current Weather</small>
-      <p><strong>${current.summary}</strong></p>
-      <p>Temperature: ${Math.round(current.temperature)}°F</p>
-      <p>Feels Like: ${Math.round(current.apparentTemperature)}°F</p>
-      <p>Humidity: ${Math.round(current.humidity * 100)}%</p>
-      <p>Wind: ${Math.round(current.windSpeed)} mph</p>
-    `;
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <img src="${westherIconUrl}" alt="${current.summary}" height="100%" />
+    <div>
+      <p style="margin: 0;">${Math.round(current.temperature)}°F</p>
+      <p style="margin: 0; font-size: 0.85em;">Feels like: ${Math.round(current.apparentTemperature)}°F</p>
+    </div>
+  </div>
+  <p style="margin-top: 0.5rem;">Rain Chance: ${Math.round(current.precipProbability * 100)}%</p>
+  <p style="margin: 0;">UV Index: ${current.uvIndex}</p>
+  <p style="margin: 0;">Cloud Cover: ${Math.round(current.cloudCover * 100)}%</p>
+`;`;
     document.getElementById('currentWeather').innerHTML = weatherHTML;
   })
   .catch(err => {
     document.getElementById('currentWeather').innerText = 'Failed to load weather.';
     console.error(err);
   });
+  
+  
+  
+
+
+  
+  
+  
 
 // ======= WEATHER: 5-DAY FORECAST =======
 const forecastUrl = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us`;
