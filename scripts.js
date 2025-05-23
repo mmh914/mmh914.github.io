@@ -116,7 +116,7 @@ categories.forEach(({ category, elementId, label }) => {
         return;
       }
 
-      let html = `<h2>${label}</h2>`;
+      let html = `<h2>${label}</h2><br />`;
 
       data.articles.forEach(article => {
         html += `
@@ -125,7 +125,6 @@ categories.forEach(({ category, elementId, label }) => {
             <p class="summary">${article.description || 'No summary available.'}</p>
             <small>${new Date(article.publishedAt).toLocaleString()}</small>
           </div>
-          <hr />
         `;
       });
 
