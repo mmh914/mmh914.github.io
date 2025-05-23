@@ -1,0 +1,141 @@
+const apiKey = 'PiRnFs2pu8pCFrslg9HEcls9cf4nWlC5';
+const lat = 35.2271;
+const lon = -80.8431;
+const url = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us`;
+
+fetch(url)
+.then(res => res.json())
+.then(data => {
+  const current = data.currently;
+  const weatherHTML = `
+	<h2>Current Weather</h2>
+	<p><strong>${current.summary}</strong></p>
+	<p>Temperature: ${Math.round(current.temperature)}°F</p>
+	<p>Feels Like: ${Math.round(current.apparentTemperature)}°F</p>
+	<p>Humidity: ${Math.round(current.humidity * 100)}%</p>
+	<p>Wind: ${Math.round(current.windSpeed)} mph</p>
+  `;
+  document.getElementById('currentWeather').innerHTML = weatherHTML;
+})
+.catch(err => {
+  document.getElementById('currentWeather').innerText = 'Failed to load weather.';
+  console.error(err);
+});
+
+
+
+
+
+  const forecastUrl = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us`;
+
+  fetch(forecastUrl)
+    .then(res => res.json())
+    .then(data => {
+      const daily = data.daily.data.slice(0, 5); // Next 5 days
+      let html = '<h2>5-Day Forecast</h2><div class="forecast-container">';
+
+		daily.forEach(day => {
+		  const date = new Date(day.time * 1000).toLocaleDateString(undefined, {
+			weekday: 'short',
+			month: 'short',
+			day: 'numeric'
+		  });
+
+		  html += `
+			<div class="forecast-day">
+			  <p><strong>${date}</strong></p>
+			  <p>${day.summary}</p>
+			  <p>High: ${Math.round(day.temperatureHigh)}°F</p>
+			  <p>Low: ${Math.round(day.temperatureLow)}°F</p>
+			</div>
+		  `;
+		});
+
+		html += '</div>';
+
+
+      document.getElementById('dailyForecast').innerHTML = html;
+    })
+    .catch(err => {
+      document.getElementById('dailyForecast').innerText = 'Failed to load forecast.';
+      console.error(err);
+    });
+
+
+
+
+
+	// const gnewsApiKey = '11b9d06a21890b6749c2e8103fac5d0d';
+	// const newsUrl = `https://gnews.io/api/v4/search?q=politics&lang=en&country=us&max=3&apikey=${gnewsApiKey}`;
+	
+	// fetch(newsUrl)
+	//   .then(res => res.json())
+	//   .then(data => {
+	// 	const container = document.getElementById('usPolitics');
+	// 	let html = '<h2>U.S. Politics</h2><br />';
+	
+	// 	data.articles.forEach(article => {
+	// 	  html += `
+	// 		<div class="news-article">
+	// 		  <h3>${article.title}</h3>
+	// 		  <p class="summary">${article.description || 'No summary available.'}</p>
+	// 		  <small>${new Date(article.publishedAt).toLocaleString()} | ${article.source.name}</small>
+	// 		</div>
+	// 	  `;
+	// 	});
+	
+	// 	container.innerHTML = html;
+	//   })
+	//   .catch(err => {
+	// 	document.getElementById('usPolitics').innerText = 'Failed to load news.';
+	// 	console.error(err);
+	//   });
+	
+	
+
+
+	  
+	  
+
+
+const gnewsApiKey = '11b9d06a21890b6749c2e8103fac5d0d';
+const categories = [
+  { category: 'nation', elementId: 'module-c', label: 'U.S. News' },
+  { category: 'technology', elementId: 'module-d', label: 'Technology' },
+  { category: 'sports', elementId: 'module-e', label: 'Sports' }
+];
+
+categories.forEach(({ category, elementId, label }) => {
+  const url = `https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&country=us&max=1&apikey=${gnewsApiKey}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      const article = data.articles[0];
+      if (!article) {
+        document.getElementById(elementId).innerHTML = `<p>No ${label} headline available.</p>`;
+        return;
+      }
+
+      const html = `
+        <h2>${label}</h2>
+        <h3>${article.title}</h3>
+        <p class="summary">${article.description || 'No summary available.'}</p>
+        <small>${new Date(article.publishedAt).toLocaleString()}</small>
+      `;
+
+      document.getElementById(elementId).innerHTML = html;
+    })
+    .catch(err => {
+      document.getElementById(elementId).innerText = `Failed to load ${label} news.`;
+      console.error(err);
+    });
+});
+
+
+
+
+
+
+
+	
