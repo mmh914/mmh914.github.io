@@ -3,6 +3,22 @@ const apiKey = 'PiRnFs2pu8pCFrslg9HEcls9cf4nWlC5';
 const lat = 35.2271;
 const lon = -80.8431;
 const weatherIconUrl = `https://darksky.net/images/weather-icons/${current.icon}.png`;
+const iconMap = {
+  "clear-day": "wi-day-sunny",
+  "clear-night": "wi-night-clear",
+  "partly-cloudy-day": "wi-day-cloudy",
+  "partly-cloudy-night": "wi-night-alt-cloudy",
+  "cloudy": "wi-cloudy",
+  "rain": "wi-rain",
+  "sleet": "wi-sleet",
+  "snow": "wi-snow",
+  "wind": "wi-strong-wind",
+  "fog": "wi-fog",
+  "thunderstorm": "wi-thunderstorm",
+  "hail": "wi-hail",
+  "tornado": "wi-tornado"
+  // Add more as needed from Pirate's extended icon list
+};
 
 const gnewsApiKey = '11b9d06a21890b6749c2e8103fac5d0d';
 const categories = [
