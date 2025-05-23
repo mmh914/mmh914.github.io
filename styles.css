@@ -118,3 +118,12 @@ body {
   color: #ccc;
   margin-bottom: 0.5rem;
 }
+.section-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #888;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
