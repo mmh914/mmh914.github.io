@@ -45,35 +45,24 @@ fetch(currentWeatherUrl)
   .then(data => {
     const current = data.currently;
     const iconClass = iconMap[current.icon] || "wi-na";  // fallback if missing
- const weatherHTML = `
-  <div style="display: flex; align-items: center; gap: 1rem;">
-    <i class="wi ${iconClass}" style="font-size: 48px;"></i>
-    <div>
-      <p style="margin: 0;">${Math.round(current.temperature)}°F</p>
-      <p style="margin: 0; font-size: 0.85em;">Feels like: ${Math.round(current.apparentTemperature)}°F</p>
-    </div>
-  </div>
-  <p style="margin-top: 0.5rem;">Rain Chance: ${Math.round(current.precipProbability * 100)}%</p>
-  <p style="margin: 0;">UV Index: ${current.uvIndex}</p>
-  <p style="margin: 0;">Cloud Cover: ${Math.round(current.cloudCover * 100)}%</p>
-`;
+ 		const weatherHTML = `
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <i class="wi ${iconClass}" style="font-size: 48px;"></i>
+        <div>
+          <p style="margin: 0;">${Math.round(current.temperature)}°F</p>
+          <p style="margin: 0; font-size: 0.85em;">Feels like: ${Math.round(current.apparentTemperature)}°F</p>
+        </div>
+      </div>
+      <p style="margin-top: 0.5rem;">Rain Chance: ${Math.round(current.precipProbability * 100)}%</p>
+      <p style="margin: 0;">UV Index: ${current.uvIndex}</p>
+      <p style="margin: 0;">Cloud Cover: ${Math.round(current.cloudCover * 100)}%</p>
+    `;
     document.getElementById('currentWeather').innerHTML = weatherHTML;
   })
   .catch(err => {
     document.getElementById('currentWeather').innerText = 'Failed to load weather.';
     console.error(err);
   });
-  
-  
-  
-  
-  
-
-
-
-
-
-
 
 
 // ======= WEATHER: 5-DAY FORECAST =======
