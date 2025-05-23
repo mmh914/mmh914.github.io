@@ -1,77 +1,7 @@
+// ======= CONFIGURATION =======
 const apiKey = 'PiRnFs2pu8pCFrslg9HEcls9cf4nWlC5';
 const lat = 35.2271;
 const lon = -80.8431;
-const url = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us`;
-
-function trim(str, max = 120) {
-  return str.length > max ? str.slice(0, max) + '...' : str;
-}
-
-
-fetch(url)
-.then(res => res.json())
-.then(data => {
-  const current = data.currently;
-  const weatherHTML = `
-	<small class="section-label">Current Weather</small>
-	<p><strong>${current.summary}</strong></p>
-	<p>Temperature: ${Math.round(current.temperature)}°F</p>
-	<p>Feels Like: ${Math.round(current.apparentTemperature)}°F</p>
-	<p>Humidity: ${Math.round(current.humidity * 100)}%</p>
-	<p>Wind: ${Math.round(current.windSpeed)} mph</p>
-  `;
-  document.getElementById('currentWeather').innerHTML = weatherHTML;
-})
-.catch(err => {
-  document.getElementById('currentWeather').innerText = 'Failed to load weather.';
-  console.error(err);
-});
-
-
-
-
-
-  const forecastUrl = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us`;
-
-  fetch(forecastUrl)
-    .then(res => res.json())
-    .then(data => {
-      const daily = data.daily.data.slice(0, 5); // Next 5 days
-      let html = '<small class="section-label">5-Day Forecast</small><div class="forecast-container">';
-
-		daily.forEach(day => {
-		  const date = new Date(day.time * 1000).toLocaleDateString(undefined, {
-			weekday: 'short',
-			month: 'short',
-			day: 'numeric'
-		  });
-
-		  html += `
-			<div class="forecast-day">
-			  <p><strong>${date}</strong></p>
-			  <p>${day.summary}</p>
-			  <p>High: ${Math.round(day.temperatureHigh)}°F</p>
-			  <p>Low: ${Math.round(day.temperatureLow)}°F</p>
-			</div>
-		  `;
-		});
-
-		html += '</div>';
-
-
-      document.getElementById('dailyForecast').innerHTML = html;
-    })
-    .catch(err => {
-      document.getElementById('dailyForecast').innerText = 'Failed to load forecast.';
-      console.error(err);
-    });
-
-	
-
-
-	  
-	  
-
 
 const gnewsApiKey = '11b9d06a21890b6749c2e8103fac5d0d';
 const categories = [
@@ -80,6 +10,74 @@ const categories = [
   { category: 'sports', elementId: 'sportsNews', label: 'Sports' }
 ];
 
+// ======= UTILITY FUNCTIONS =======
+/**
+ * Trims a string to a specified max length and appends ellipsis if needed.
+ * @param {string} str - The input string.
+ * @param {number} max - Maximum allowed length.
+ * @returns {string}
+ */
+function trim(str, max = 120) {
+  return str.length > max ? str.slice(0, max) + '...' : str;
+}
+
+// ======= WEATHER: CURRENT CONDITIONS =======
+const currentWeatherUrl = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us`;
+
+fetch(currentWeatherUrl)
+  .then(res => res.json())
+  .then(data => {
+    const current = data.currently;
+    const weatherHTML = `
+      <small class="section-label">Current Weather</small>
+      <p><strong>${current.summary}</strong></p>
+      <p>Temperature: ${Math.round(current.temperature)}°F</p>
+      <p>Feels Like: ${Math.round(current.apparentTemperature)}°F</p>
+      <p>Humidity: ${Math.round(current.humidity * 100)}%</p>
+      <p>Wind: ${Math.round(current.windSpeed)} mph</p>
+    `;
+    document.getElementById('currentWeather').innerHTML = weatherHTML;
+  })
+  .catch(err => {
+    document.getElementById('currentWeather').innerText = 'Failed to load weather.';
+    console.error(err);
+  });
+
+// ======= WEATHER: 5-DAY FORECAST =======
+const forecastUrl = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us`;
+
+fetch(forecastUrl)
+  .then(res => res.json())
+  .then(data => {
+    const daily = data.daily.data.slice(0, 5); // Next 5 days
+    let html = '<small class="section-label">5-Day Forecast</small><div class="forecast-container">';
+
+    daily.forEach(day => {
+      const date = new Date(day.time * 1000).toLocaleDateString(undefined, {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric'
+      });
+
+      html += `
+        <div class="forecast-day">
+          <p><strong>${date}</strong></p>
+          <p>${day.summary}</p>
+          <p>High: ${Math.round(day.temperatureHigh)}°F</p>
+          <p>Low: ${Math.round(day.temperatureLow)}°F</p>
+        </div>
+      `;
+    });
+
+    html += '</div>';
+    document.getElementById('dailyForecast').innerHTML = html;
+  })
+  .catch(err => {
+    document.getElementById('dailyForecast').innerText = 'Failed to load forecast.';
+    console.error(err);
+  });
+
+// ======= NEWS HEADLINES =======
 categories.forEach(({ category, elementId, label }) => {
   const url = `https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&country=us&max=2&apikey=${gnewsApiKey}`;
 
@@ -91,7 +89,7 @@ categories.forEach(({ category, elementId, label }) => {
         return;
       }
 
-      let html = `<small class="section-label">${label}</small>`<br />`;
+      let html = `<small class="section-label">${label}</small>`;
 
       data.articles.forEach(article => {
         html += `
@@ -110,10 +108,3 @@ categories.forEach(({ category, elementId, label }) => {
       console.error(err);
     });
 });
-
-
-
-
-
-
-	
