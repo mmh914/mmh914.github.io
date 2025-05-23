@@ -23,7 +23,7 @@ function trimDescription(str, max = 120) {
 }
 
 // ======= WEATHER: CURRENT CONDITIONS =======
-const currentWeatherUrl = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us`;
+const currentWeatherUrl = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us&version=2&icon=pirate`;
 
 fetch(currentWeatherUrl)
   .then(res => res.json())
