@@ -111,18 +111,23 @@ categories.forEach(({ category, elementId, label }) => {
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      const article = data.articles[0];
-      if (!article) {
-        document.getElementById(elementId).innerHTML = `<p>No ${label} headline available.</p>`;
+      if (!data.articles || data.articles.length === 0) {
+        document.getElementById(elementId).innerHTML = `<p>No ${label} headlines available.</p>`;
         return;
       }
 
-      const html = `
-        <h2>${label}</h2>
-        <h3>${article.title}</h3>
-        <p class="summary">${article.description || 'No summary available.'}</p>
-        <small>${new Date(article.publishedAt).toLocaleString()}</small>
-      `;
+      let html = `<h2>${label}</h2>`;
+
+      data.articles.forEach(article => {
+        html += `
+          <div class="news-article">
+            <h3>${article.title}</h3>
+            <p class="summary">${article.description || 'No summary available.'}</p>
+            <small>${new Date(article.publishedAt).toLocaleString()}</small>
+          </div>
+          <hr />
+        `;
+      });
 
       document.getElementById(elementId).innerHTML = html;
     })
@@ -131,7 +136,6 @@ categories.forEach(({ category, elementId, label }) => {
       console.error(err);
     });
 });
-
 
 
 
