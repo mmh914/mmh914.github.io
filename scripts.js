@@ -17,7 +17,7 @@ const categories = [
  * @param {number} max - Maximum allowed length.
  * @returns {string}
  */
-function trim(str, max = 120) {
+function trimDescription(str, max = 120) {
   return str.length > max ? str.slice(0, max) + '...' : str;
 }
 
@@ -95,7 +95,7 @@ categories.forEach(({ category, elementId, label }) => {
         html += `
           <div class="news-article">
             <h3>${article.title}</h3>
-            <p class="summary">${trim(article.description || 'No summary available.')}</p>
+            <p class="summary">${trimDescription(article.description || 'No summary available.')}</p>
             <small>${new Date(article.publishedAt).toLocaleString()}</small>
           </div>
         `;
