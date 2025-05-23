@@ -8,7 +8,7 @@ fetch(url)
 .then(data => {
   const current = data.currently;
   const weatherHTML = `
-	<h2>Current Weather</h2>
+	<small class="section-label">Current Weather</small>
 	<p><strong>${current.summary}</strong></p>
 	<p>Temperature: ${Math.round(current.temperature)}°F</p>
 	<p>Feels Like: ${Math.round(current.apparentTemperature)}°F</p>
@@ -32,7 +32,7 @@ fetch(url)
     .then(res => res.json())
     .then(data => {
       const daily = data.daily.data.slice(0, 5); // Next 5 days
-      let html = '<h2>5-Day Forecast</h2><div class="forecast-container">';
+      let html = '<small class="section-label">5-Day Forecast</small><div class="forecast-container">';
 
 		daily.forEach(day => {
 		  const date = new Date(day.time * 1000).toLocaleDateString(undefined, {
@@ -116,7 +116,7 @@ categories.forEach(({ category, elementId, label }) => {
         return;
       }
 
-      let html = `<h2>${label}</h2><br />`;
+      let html = `<small class="section-label">${label}</small>`<br />`;
 
       data.articles.forEach(article => {
         html += `
