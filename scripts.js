@@ -106,7 +106,7 @@ const categories = [
 ];
 
 categories.forEach(({ category, elementId, label }) => {
-  const url = `https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&country=us&max=1&apikey=${gnewsApiKey}`;
+  const url = `https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&country=us&max=2&apikey=${gnewsApiKey}`;
 
   fetch(url)
     .then(res => res.json())
