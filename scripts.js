@@ -2,7 +2,6 @@
 const apiKey = 'PiRnFs2pu8pCFrslg9HEcls9cf4nWlC5';
 const lat = 35.2271;
 const lon = -80.8431;
-const weatherIconUrl = `https://darksky.net/images/weather-icons/${current.icon}.png`;
 const iconMap = {
   "clear-day": "wi-day-sunny",
   "clear-night": "wi-night-clear",
