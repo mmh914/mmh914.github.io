@@ -100,9 +100,9 @@ fetch(url)
 
 const gnewsApiKey = '11b9d06a21890b6749c2e8103fac5d0d';
 const categories = [
-  { category: 'nation', elementId: 'module-c', label: 'U.S. News' },
-  { category: 'technology', elementId: 'module-d', label: 'Technology' },
-  { category: 'sports', elementId: 'module-e', label: 'Sports' }
+  { category: 'nation', elementId: 'usNews', label: 'U.S. News' },
+  { category: 'technology', elementId: 'techNews', label: 'Technology' },
+  { category: 'sports', elementId: 'sportsNews', label: 'Sports' }
 ];
 
 categories.forEach(({ category, elementId, label }) => {
