@@ -97,7 +97,7 @@ categories.forEach(({ category, elementId, label }) => {
         html += `
           <div class="news-article">
             <h3>${article.title}</h3>
-            <p class="summary">${trim(article.description) || 'No summary available.'}</p>
+            <p class="summary">${trim(article.description || 'No summary available.')}</p>
             <small>${new Date(article.publishedAt).toLocaleString()}</small>
           </div>
         `;
