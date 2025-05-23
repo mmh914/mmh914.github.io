@@ -45,9 +45,10 @@ fetch(currentWeatherUrl)
   .then(res => res.json())
   .then(data => {
     const current = data.currently;
-    const weatherHTML = `
+    const iconClass = iconMap[current.icon] || "wi-na";  // fallback if missing
+ const weatherHTML = `
   <div style="display: flex; align-items: center; gap: 1rem;">
-    <img src="${westherIconUrl}" alt="${current.summary}" height="100%" />
+    <i class="wi ${iconClass}" style="font-size: 48px;"></i>
     <div>
       <p style="margin: 0;">${Math.round(current.temperature)}°F</p>
       <p style="margin: 0; font-size: 0.85em;">Feels like: ${Math.round(current.apparentTemperature)}°F</p>
@@ -56,7 +57,7 @@ fetch(currentWeatherUrl)
   <p style="margin-top: 0.5rem;">Rain Chance: ${Math.round(current.precipProbability * 100)}%</p>
   <p style="margin: 0;">UV Index: ${current.uvIndex}</p>
   <p style="margin: 0;">Cloud Cover: ${Math.round(current.cloudCover * 100)}%</p>
-`;`;
+`;
     document.getElementById('currentWeather').innerHTML = weatherHTML;
   })
   .catch(err => {
@@ -66,11 +67,15 @@ fetch(currentWeatherUrl)
   
   
   
+  
+  
 
 
-  
-  
-  
+
+
+
+
+
 
 // ======= WEATHER: 5-DAY FORECAST =======
 const forecastUrl = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us`;
