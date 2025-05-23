@@ -1,5 +1,6 @@
 // ======= CONFIGURATION =======
-const apiKey = 'PiRnFs2pu8pCFrslg9HEcls9cf4nWlC5';
+const pirateAPIKey = 'PiRnFs2pu8pCFrslg9HEcls9cf4nWlC5';
+const currentWeatherUrl = `https://api.pirateweather.net/forecast/${pirateAPIKey}/${lat},${lon}?units=us&version=2&icon=pirate`;
 const lat = 35.2271;
 const lon = -80.8431;
 const iconMap = {
@@ -38,7 +39,6 @@ function trimDescription(str, max = 120) {
 }
 
 // ======= WEATHER: CURRENT CONDITIONS =======
-const currentWeatherUrl = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us&version=2&icon=pirate`;
 
 fetch(currentWeatherUrl)
   .then(res => res.json())
