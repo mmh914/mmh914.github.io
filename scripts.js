@@ -3,6 +3,11 @@ const lat = 35.2271;
 const lon = -80.8431;
 const url = `https://api.pirateweather.net/forecast/${apiKey}/${lat},${lon}?units=us`;
 
+function trim(str, max = 120) {
+  return str.length > max ? str.slice(0, max) + '...' : str;
+}
+
+
 fetch(url)
 .then(res => res.json())
 .then(data => {
@@ -122,7 +127,7 @@ categories.forEach(({ category, elementId, label }) => {
         html += `
           <div class="news-article">
             <h3>${article.title}</h3>
-            <p class="summary">${article.description || 'No summary available.'}</p>
+            <p class="summary">${trim(article.description) || 'No summary available.'}</p>
             <small>${new Date(article.publishedAt).toLocaleString()}</small>
           </div>
         `;
