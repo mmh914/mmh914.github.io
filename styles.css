@@ -50,7 +50,6 @@ body {
 .module-a {
   height: 60%;
 }
-
 .module-b, .module-c {
   height: 20%;
 }
@@ -126,4 +125,41 @@ body {
   margin-bottom: 0.25rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.current-weather {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 1rem;
+}
+
+.weather-strip {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.weather-icon {
+  flex: 0 0 20%;
+  font-size: 6vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-data {
+  flex: 0 0 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2vw;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  ;
 }
