@@ -6,6 +6,8 @@ const lat = 35.2271;
 const lon = -80.8431;
 const currentWeatherUrl = `https://api.pirateweather.net/forecast/${pirateAPIKey}/${lat},${lon}?units=us&version=2&icon=pirate`;
 const forecastUrl = `https://api.pirateweather.net/forecast/${pirateAPIKey}/${lat},${lon}?units=us`;
+let dailyPrecipitation = JSON.parse(localStorage.getItem('dailyPrecipitation')) || [0, 0, 0, 0, 0, 0, 0];
+let weeklyPrecipitation = 0;
 
 // Map of Pirate Weather icon names to Weather Icons classes
 const iconMap = {
@@ -56,15 +58,18 @@ function updateCurrentWeather() {
     .then(data => {
       const current = data.currently;
       const iconClass = iconMap[current.icon] || "wi-na"; // fallback icon if unknown
+      weeklyPrecipitation = dailyPrecipitation.reduce((sum, val) => sum + val, 0);
+      
 
       const weatherHTML = `
         <small class="section-label">Current Conditions</small>
         <div class="weather-strip">
           <i class="wi ${iconClass} weather-icon"></i>
           <span class="weather-data">${Math.round(current.temperature)}°F</span>
-          <span class="weather-data">💧${Math.round(current.precipProbability * 100)}%</span>
-          <span class="weather-data">☀️${current.uvIndex}</span>
+          <span class="weather-data">🌧️${Math.round(current.precipProbability * 100)}%</span>
+          <span class="weather-data">☀️${Math.round(current.uvIndex)}</span>
           <span class="weather-data">☁️${Math.round(current.cloudCover * 100)}%</span>
+          <span class="weather-data">💧${(weeklyPrecipitation).toFixed(1)}"</span>
         </div>
       `;
 
@@ -159,6 +164,7 @@ updateCurrentWeather();
 updateForecast();
 updateNews();
 
+
 // Update every hour
 setInterval(() => {
   updateCurrentWeather();
@@ -168,15 +174,38 @@ setInterval(() => {
 
 // ======= DAILY RELOAD =======
 
+function recordDailyPrecipitation() {
+  fetch(currentWeatherUrl)
+    .then(res => res.json())
+    .then(data => {
+      const currentLiquid = data.currently?.currentDayLiquid || 0;
+
+      dailyPrecipitation.push(currentLiquid);
+      if (dailyPrecipitation.length > 7) {
+        dailyPrecipitation.shift();
+      }
+
+      localStorage.setItem('dailyPrecipitation', JSON.stringify(dailyPrecipitation));
+      console.log('Updated 7-day precipitation:', dailyPrecipitation);
+    })
+    .catch(err => {
+      console.error('Failed to record daily precipitation:', err);
+    });
+    weeklyPrecipitation = dailyPrecipitation.reduce((sum, val) => sum + val, 0);
+}
+
+
+
 /**
  * Schedules a full page reload at a specified time daily.
  * Default is 3:00 AM.
  * @param {number} hour - Hour (0–23)
  * @param {number} minute - Minute (0–59)
  */
-function scheduleDailyReload(hour = 3, minute = 0) {
+function scheduleDailyReload(hour = 23, minute = 58) {
   const now = new Date();
   const reloadTime = new Date();
+  
 
   reloadTime.setHours(hour);
   reloadTime.setMinutes(minute);
@@ -191,8 +220,14 @@ function scheduleDailyReload(hour = 3, minute = 0) {
   const msUntilReload = reloadTime.getTime() - now.getTime();
 
   setTimeout(() => {
-    location.reload();
+    // Step 1: Log precipitation for the day
+    recordDailyPrecipitation();
+
+    // Step 2: Wait a few seconds, then reload the page
+    setTimeout(() => {
+      location.reload();
+    }, 5000); // wait 5 seconds after recording
   }, msUntilReload);
 }
 
-scheduleDailyReload(); // Reload at 3:00 AM
+scheduleDailyReload(); // Reload at 11:58 PM
