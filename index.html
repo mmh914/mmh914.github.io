@@ -2,83 +2,82 @@
 
 
 <html lang="en">
-<head>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" />
-<link rel="stylesheet" href="normalize.css" />
+	<head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" />
+		<link rel="stylesheet" href="normalize.css" />
 		<link rel="stylesheet" href="styles.css" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pi Dashboard</title>
-</head>
-<body>
-  <div class="container">
-    <div class="left">
-	
-	
-      <div class="module module-a" id="weatherMap">
-		
-		  <iframe
-			src="https://www.rainviewer.com/map.html?loc=custom&c=35.2271,-80.8431&z=8&ovradar=1&opa=80&sm=1&l=0&anim=1&speed=100"
-			width="100%"
-			height="100%"
-			style="border: none;"
-			loading="lazy"
-		  ></iframe>
-
-	  
-	  </div>
-	  
-	  
-      <div class="module module-b" id="currentWeather">
-	  
-		Loading current weather...
-			  
-	  </div>
-	  
-	  
-	  
-	  <div class="module module-c" id="dailyForecast">
-	  
-		Loading 5-day forecast...
-	  
-	  </div>
-    </div>
-	
-	
-	
-    <div class="right">
-	
-	
-      <div class="module module-d" id="usNews">
-
-		Loading US Political News...
-	  
-	  </div>
-	  
-	  
-      <div class="module module-e" id="techNews">
-							
-							Loading tech news...
-	  
-	  
-	  </div>
-	  
-	  
-	  <div class="module module-f" id="sportsNews">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Pi Dashboard</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="left">
 				
+				
+				<div class="module module-a" id="weatherMap">
+					
+					<iframe
+					src="https://www.rainviewer.com/map.html?loc=custom&c=35.2271,-80.8431&z=8&ovradar=1&opa=80&sm=1&l=0&anim=1&speed=100"
+					width="100%"
+					height="100%"
+					style="border: none;"
+					loading="lazy"
+					></iframe>
+					
+					
+				</div>
+				
+				
+				<div class="module module-b" id="currentWeather">
+					
+					Loading current weather...
+					
+				</div>
+				
+				
+				
+				<div class="module module-c" id="dailyForecast">
+					
+					Loading 5-day forecast...
+					
+				</div>
+			</div>
+			
+			
+			
+			<div class="right">
+				
+				
+				<div class="module module-d" id="usNews">
+					
+					Loading US Political News...
+					
+				</div>
+				
+				
+				<div class="module module-e" id="techNews">
+					
+					Loading tech news...
+					
+					
+				</div>
+				
+				
+				<div class="module module-f" id="sportsNews">
+					
 					Loading sports news...
-	  
-	  
-	  </div>
-	  
-	  
-  </div>
-  
-  <script src="scripts.js"></script>
-</body>
-
-
-
-
+					
+					
+				</div>
+				
+				
+		</div>
+			
+		<script src="scripts.js"></script>
+	</body>
+	
+	
+	
+	
 </html>
-
